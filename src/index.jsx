@@ -8,6 +8,7 @@ import { ThemeProvider } from "@mui/material";
 import theme from "./utils/theme";
 
 import App from "./containers/App";
+import "./index.css";
 
 ReactDOM.render(
   <Provider store={store}>

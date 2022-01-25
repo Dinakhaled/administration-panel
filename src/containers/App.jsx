@@ -1,11 +1,30 @@
 import React from "react";
-import Button from "@mui/material/Button";
+import { useSelector } from "react-redux";
+import { Box, Typography } from "@mui/material";
+
+import AppRoutes from "routes/Routes";
+
+import Loader from "components/Loader";
+import Snackbar from "components/Snackbar";
+
+import { styles } from "./AppStyle";
+const { mainWrapper } = styles;
 
 const App = () => {
+  const isLoading = useSelector((state) => state.loader);
+
   return (
-    <div className="App">
-      <Button variant="contained">Hello World</Button>
-    </div>
+    <>
+      {isLoading && <Loader />}
+      <Snackbar />
+      <Box sx={mainWrapper}>
+        <Typography variant="h2" component="h2">
+          Dashboard
+        </Typography>
+
+        {AppRoutes}
+      </Box>
+    </>
   );
 };
 
