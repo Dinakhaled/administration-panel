@@ -9,7 +9,11 @@ import {
   Typography
 } from "@mui/material";
 
-import { getUsersAction } from "store/users/actions";
+import {
+  deleteUserIdAction,
+  getUsersAction,
+  setUsersAction
+} from "store/users/actions";
 import { ROUTE_PATHS } from "utils/pathNames";
 
 import Table from "components/Table";
@@ -21,20 +25,39 @@ const UsersList = () => {
   const navigate = useNavigate();
   const { list } = useSelector((state) => state.users);
 
-  const [deletedUserId, setDeletedUserId] = useState(false);
+  const [sortDir, setSortDir] = useState(true);
 
   useEffect(() => {
     list.length === 0 && dispatch(getUsersAction());
   }, []);
 
+  const sotrUserName = () => {
+    let sortedList = [];
+    if (sortDir) {
+      sortedList = list.sort((a, b) =>
+        a.username > b.username ? 1 : b.username > a.username ? -1 : 0
+      );
+    } else {
+      sortedList = list.sort((a, b) =>
+        a.username < b.username ? 1 : b.username < a.username ? -1 : 0
+      );
+    }
+    dispatch(setUsersAction(sortedList));
+    setSortDir(!sortDir);
+  };
+
   const tableKeys = {
-    id: "ID",
-    name: "Name",
-    username: "Username",
-    city: "City",
-    email: "Email",
-    edit: "Edit",
-    delete: "Delete"
+    id: { label: "ID", isSortable: false },
+    name: { label: "Name", isSortable: false },
+    username: {
+      label: "Username",
+      isSortable: true,
+      handleSort: sotrUserName
+    },
+    city: { label: "City", isSortable: false },
+    email: { label: "Email", isSortable: false },
+    edit: { label: "Edit", isSortable: false },
+    delete: { label: "Delete", isSortable: false }
   };
 
   const renderRowData = (key, row) => {
@@ -58,7 +81,7 @@ const UsersList = () => {
           <Button
             variant="contained"
             color="error"
-            onClick={() => setDeletedUserId(row.id)}
+            onClick={() => dispatch(deleteUserIdAction(row.id))}
           >
             Delete
           </Button>
@@ -108,7 +131,7 @@ const UsersList = () => {
       ) : (
         <EmptyState />
       )}
-      <DeleteUser id={deletedUserId} />
+      <DeleteUser />
     </>
   );
 };

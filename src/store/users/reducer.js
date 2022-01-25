@@ -1,7 +1,14 @@
-import { ADD_USER, DELETE_USER, EDIT_USER, SET_USERS } from "./types";
+import {
+  ADD_USER,
+  DELETE_USER,
+  EDIT_USER,
+  SET_USERS,
+  DELETE_USER_ID
+} from "./types";
 
 const initialState = {
-  list: []
+  list: [],
+  deleteUserId: false
 };
 
 const usersReducer = (state = initialState, action) => {
@@ -27,6 +34,11 @@ const usersReducer = (state = initialState, action) => {
       return {
         ...state,
         list: state.list.filter((user) => user.id !== action.payload)
+      };
+    case DELETE_USER_ID:
+      return {
+        ...state,
+        deleteUserId: action.payload
       };
     default:
       return {

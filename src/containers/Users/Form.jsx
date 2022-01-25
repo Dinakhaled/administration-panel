@@ -26,11 +26,7 @@ const UserForm = () => {
   const handleSubmit = ({ name, email }) => {
     const user = {
       ...selectedUser,
-      id: id
-        ? +id
-        : usersList.length > 0
-        ? usersList.slice(-1).pop().id + 1
-        : 1,
+      id: id ? +id : Math.floor(Math.random() * (300 - 11) + 11),
       name,
       email
     };

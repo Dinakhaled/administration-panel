@@ -1,6 +1,7 @@
 import {
   ADD_USER,
   DELETE_USER,
+  DELETE_USER_ID,
   EDIT_USER,
   GET_USERS,
   SET_USERS
@@ -27,5 +28,10 @@ export const editUserAction = (payload) => ({
 
 export const deleteUserAction = (payload) => ({
   type: DELETE_USER,
+  payload
+});
+
+export const deleteUserIdAction = (payload) => ({
+  type: DELETE_USER_ID,
   payload
 });

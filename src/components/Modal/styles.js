@@ -29,7 +29,8 @@ export const CustomDialog = styled(Dialog)(() => ({
 export const CustomDialogTitle = styled(DialogTitle)(() => ({
   padding: 0,
   fontSize: 24,
-  fontWeight: 500
+  fontWeight: 500,
+  marginBottom: 10
 }));
 
 export const CustomSubTitle = styled(Typography)(() => ({

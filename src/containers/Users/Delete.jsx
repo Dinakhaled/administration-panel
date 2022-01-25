@@ -1,16 +1,20 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Button } from "@mui/material";
 
 import Modal from "components/Modal";
 
-import { deleteUserAction } from "store/users/actions";
+import {
+  deleteUserAction,
+  deleteUserIdAction
+} from "store/users/actions";
 import { showHideSnackbar } from "store/snackbar/actions";
 
-const DeleteUser = ({ id }) => {
+const DeleteUser = () => {
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
+  const id = useSelector((state) => state.users.deleteUserId);
 
   useEffect(() => {
     id ? setIsOpen(true) : setIsOpen(false);
@@ -30,6 +34,7 @@ const DeleteUser = ({ id }) => {
 
   const handleClose = () => {
     setIsOpen(false);
+    dispatch(deleteUserIdAction(false));
   };
 
   return (
