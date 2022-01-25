@@ -1,16 +1,21 @@
-import React, { Suspense } from "react";
-import { Router, Switch, Redirect } from "react-router-dom";
-import history from "./History";
-// ========= Components =========
+import React from "react";
+import { Route, Routes, BrowserRouter } from "react-router-dom";
+import { ROUTE_PATHS } from "utils/pathNames";
+// ========= Containers =========
+import Users from "containers/Users";
+import UserForm from "containers/Users/Form";
 
-const Routes = (
-  <Suspense fallback={"loading..."}>
-    <Router history={history}>
-      <Switch>
-        <Redirect from="*" to="/" />
-      </Switch>
-    </Router>
-  </Suspense>
+const AppRoutes = (
+  <BrowserRouter>
+    <Routes>
+      <Route path={ROUTE_PATHS.usersList} element={<Users />} />
+      <Route path={ROUTE_PATHS.addUser} element={<UserForm />} />
+      <Route
+        path={`${ROUTE_PATHS.editUser}/:id`}
+        element={<UserForm />}
+      />
+    </Routes>
+  </BrowserRouter>
 );
 
-export default Routes;
+export default AppRoutes;

@@ -18,7 +18,8 @@
     "guard-for-in": "off",
     "no-extend-native": "off",
     "no-inner-declarations": "warn",
-    "no-invalid-this": "warn"
+    "no-invalid-this": "warn",
+    "no-unused-vars": "warn"
   },
   "env": {
     "browser": true,
